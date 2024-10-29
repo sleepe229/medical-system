@@ -1,12 +1,17 @@
 package org.example.hospitalmanagementsystem.entities;
 
-public class Statuses extends BaseEntity {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "statuses")
+public class Status extends BaseEntity {
     private String type;
     private String value;
 
-    protected Statuses() {}
+    protected Status() {}
 
-    public Statuses(String type, String value) {
+    public Status(String type, String value) {
 
     }
     private String getType() {return this.type;}
