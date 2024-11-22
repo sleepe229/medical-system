@@ -73,5 +73,5 @@ services:
 #    depends_on:
 #      - kafka
 #
-volumes:
-  kafka_data:
+#volumes:
+#  kafka_data:

@@ -38,4 +38,8 @@ public class Clinic extends BaseEntity {
     public Set<Doctor> getDoctors() {
         return doctors;
     }
+
+    public void setDoctors(Set<Doctor> doctors) {
+        this.doctors = doctors;
+    }
 }
