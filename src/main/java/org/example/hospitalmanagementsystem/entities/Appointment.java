@@ -6,17 +6,19 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "appointments")
 public class Appointment extends BaseEntity {
     Doctor doctor;
     Client client;
-    LocalDate appointmentDate;
+    LocalDateTime appointmentDate;
     Status status;
+    String appointmentResult;
 
     protected Appointment() {}
-    public Appointment(Doctor doctor, Client client, LocalDate appointmentDate, Status status) {
+    public Appointment(Doctor doctor, Client client, LocalDateTime appointmentDate, Status status) {
         this.doctor = doctor;
         this.client = client;
         this.appointmentDate = appointmentDate;
@@ -43,11 +45,11 @@ public class Appointment extends BaseEntity {
         this.client = client;
     }
 
-    public LocalDate getAppointmentDate() {
+    public LocalDateTime getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(LocalDate appointmentDate) {
+    public void setAppointmentDate(LocalDateTime appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 
@@ -59,5 +61,13 @@ public class Appointment extends BaseEntity {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getAppointmentResult() {
+        return appointmentResult;
+    }
+
+    public void setAppointmentResult(String appointmentResult) {
+        this.appointmentResult = appointmentResult;
     }
 }

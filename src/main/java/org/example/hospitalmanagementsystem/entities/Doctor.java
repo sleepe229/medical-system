@@ -1,7 +1,6 @@
 package org.example.hospitalmanagementsystem.entities;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -12,12 +11,12 @@ public class Doctor extends BasePerson {
     private String education;
     private LocalDate hireDate;
     private String position;
-    private Department department;
     private Status status;
+    private Clinic clinic;
 
     protected Doctor() {}
 
-    @ManyToMany(mappedBy = "doctors", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToMany(mappedBy = "doctors", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     public Set<Specialization> getSpecializations() {
         return specializations;
     }
@@ -50,17 +49,7 @@ public class Doctor extends BasePerson {
         this.position = position;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinColumn(name = "department_id", referencedColumnName = "id")
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     public Status getStatus() {
         return status;
@@ -68,5 +57,15 @@ public class Doctor extends BasePerson {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "clinic_id", referencedColumnName = "id")
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
     }
 }

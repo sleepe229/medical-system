@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Table(name = "analyzes")
 public class Analyse extends BaseEntity {
     Client client;
+    Doctor doctor;
     Status status;
     String comment;
     LocalDateTime dateTaken;
@@ -39,6 +40,16 @@ public class Analyse extends BaseEntity {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     public String getComment() {

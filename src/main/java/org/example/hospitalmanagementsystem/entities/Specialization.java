@@ -19,7 +19,7 @@ public class Specialization extends BaseEntity {
         this.specializationName = specializationName;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "doctor_specialization",
             joinColumns = @JoinColumn(name = "specialization_id"),

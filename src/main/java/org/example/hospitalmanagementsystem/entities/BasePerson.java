@@ -5,8 +5,8 @@ import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class BasePerson extends BaseEntity {
-    String name;
-    String phoneNumber;
+    private String name;
+    private String phoneNumber;
 
     @Column(name = "name")
     public String getName() {
@@ -18,11 +18,11 @@ public abstract class BasePerson extends BaseEntity {
     }
 
     @Column(name = "phone_number")
-    public String getPhone() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phoneNumber = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
