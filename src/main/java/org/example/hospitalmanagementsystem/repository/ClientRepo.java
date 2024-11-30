@@ -1,9 +1,11 @@
 package org.example.hospitalmanagementsystem.repository;
 
 import org.example.hospitalmanagementsystem.entities.Client;
-import org.example.hospitalmanagementsystem.repository.base.CreateRepo;
-import org.example.hospitalmanagementsystem.repository.base.ReadRepo;
-import org.example.hospitalmanagementsystem.repository.base.UpdateRepo;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ClientRepo extends CreateRepo<Client>, ReadRepo<Client>, UpdateRepo<Client> {
+import java.util.Optional;
+
+public interface ClientRepo extends JpaRepository<Client, Integer> {
+    Optional<Client> findByPhoneNumber(String phoneNumber);
 }
+

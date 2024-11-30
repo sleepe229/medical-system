@@ -1,17 +1,15 @@
 package org.example.hospitalmanagementsystem.dto;
 
-public class OfferInputDto{
+public class NewsInputDto{
         String title;
         String description;
-    Integer price;
 
-    public OfferInputDto(String title, String description, Integer price) {
+    public NewsInputDto(String title, String description) {
         this.title = title;
         this.description = description;
-        this.price = price;
     }
 
-    public OfferInputDto() {
+    public NewsInputDto() {
     }
 
     public String getTitle() {
@@ -29,12 +27,5 @@ public class OfferInputDto{
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
 }
+

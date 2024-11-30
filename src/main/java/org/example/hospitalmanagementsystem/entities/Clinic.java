@@ -9,7 +9,7 @@ import java.util.Set;
 public class Clinic extends BaseEntity {
     private String name;
     private String address;
-    private Set<Doctor> doctors = new HashSet<>();
+    private Set<Doctor> doctors;
 
     protected Clinic() {}
 

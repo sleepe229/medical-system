@@ -5,16 +5,23 @@ import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class BasePerson extends BaseEntity {
-    private String name;
+    private String fullName;
     private String phoneNumber;
 
-    @Column(name = "name")
-    public String getName() {
-        return name;
+    protected BasePerson() {}
+
+    public BasePerson(String name, String phoneNumber) {
+        this.fullName = name;
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Column(name = "name")
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String name) {
+        this.fullName = name;
     }
 
     @Column(name = "phone_number")

@@ -3,11 +3,10 @@ package org.example.hospitalmanagementsystem.entities;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
-
 @Entity
 @Table(name = "doctors")
 public class Doctor extends BasePerson {
-    private Set<Specialization> specializations;
+    private Specialization specialization;
     private String education;
     private LocalDate hireDate;
     private String position;
@@ -16,13 +15,24 @@ public class Doctor extends BasePerson {
 
     protected Doctor() {}
 
-    @ManyToMany(mappedBy = "doctors", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    public Set<Specialization> getSpecializations() {
-        return specializations;
+    public Doctor(String name, String phoneNumber, Specialization specialization, String education, LocalDate hireDate, String position, Status status, Clinic clinic) {
+        super(name, phoneNumber);
+        this.specialization = specialization;
+        this.education = education;
+        this.hireDate = hireDate;
+        this.position = position;
+        this.status = status;
+        this.clinic = clinic;
     }
 
-    public void setSpecializations(Set<Specialization> specializations) {
-        this.specializations = specializations;
+    @ManyToOne
+    @JoinColumn(name = "specialization_id", referencedColumnName = "id")
+    public Specialization getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(Specialization specialization) {
+        this.specialization = specialization;
     }
 
     public String getEducation() {

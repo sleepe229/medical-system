@@ -7,7 +7,6 @@ import java.util.Set;
 @Table(name = "specializations")
 public class Specialization extends BaseEntity {
     private String specializationName;
-    private Set<Doctor> doctors;
 
     protected Specialization() {}
 
@@ -17,19 +16,5 @@ public class Specialization extends BaseEntity {
 
     public void setSpecializationName(String specializationName) {
         this.specializationName = specializationName;
-    }
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "doctor_specialization",
-            joinColumns = @JoinColumn(name = "specialization_id"),
-            inverseJoinColumns = @JoinColumn(name = "doctor_id")
-    )
-    public Set<Doctor> getDoctors() {
-        return doctors;
-    }
-
-    public void setDoctors(Set<Doctor> doctors) {
-        this.doctors = doctors;
     }
 }

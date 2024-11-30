@@ -1,9 +1,6 @@
 package org.example.hospitalmanagementsystem.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,7 +12,7 @@ public class Appointment extends BaseEntity {
     Client client;
     LocalDateTime appointmentDate;
     Status status;
-    String appointmentResult;
+    Analyse analyse;
 
     protected Appointment() {}
     public Appointment(Doctor doctor, Client client, LocalDateTime appointmentDate, Status status) {
@@ -63,11 +60,13 @@ public class Appointment extends BaseEntity {
         this.status = status;
     }
 
-    public String getAppointmentResult() {
-        return appointmentResult;
+    @OneToOne
+    @JoinColumn(name = "analyse_id")
+    public Analyse getAnalyse() {
+        return analyse;
     }
 
-    public void setAppointmentResult(String appointmentResult) {
-        this.appointmentResult = appointmentResult;
+    public void setAnalyse(Analyse analyse) {
+        this.analyse = analyse;
     }
 }

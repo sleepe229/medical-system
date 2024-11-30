@@ -1,6 +1,8 @@
 package org.example.hospitalmanagementsystem.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -9,12 +11,14 @@ public class Offer extends BaseEntity {
     private String title;
     private String description;
     private int price;
+    private Status status;
 
     protected Offer() {}
-    public Offer(String title, String description, int price) {
+    public Offer(String title, String description, int price, Status status) {
         this.title = title;
         this.description = description;
         this.price = price;
+        this.status = status;
     }
 
     public String getTitle() {
@@ -39,5 +43,15 @@ public class Offer extends BaseEntity {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

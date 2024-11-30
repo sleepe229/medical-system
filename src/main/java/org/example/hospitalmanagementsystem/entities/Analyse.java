@@ -7,49 +7,24 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "analyzes")
 public class Analyse extends BaseEntity {
-    Client client;
-    Doctor doctor;
-    Status status;
+    Appointment appointment;
     String comment;
-    LocalDateTime dateTaken;
     LocalDateTime lastChange;
 
     protected Analyse() {}
-    protected Analyse(Client client, Status status, String comment) {
-        this.client = client;
-        this.status = status;
+    protected Analyse(Client client, String comment) {
         this.comment = comment;
-        this.dateTaken = LocalDateTime.now();
         this.lastChange = LocalDateTime.now();
     }
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    public Client getClient() {
-        return client;
+    @OneToOne
+    @JoinColumn(name = "appointment_id")
+    public Appointment getAppointment() {
+        return appointment;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
-    }
-    @ManyToOne
-    @JoinColumn(name = "status_id")
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
 
     public String getComment() {
@@ -58,14 +33,6 @@ public class Analyse extends BaseEntity {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public LocalDateTime getDateTaken() {
-        return dateTaken;
-    }
-
-    public void setDateTaken(LocalDateTime dateTaken) {
-        this.dateTaken = dateTaken;
     }
 
     public LocalDateTime getLastChange() {

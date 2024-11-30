@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Главная страница</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+<!--<header th:replace="~{fragments/header.html}"></header>-->
+<!--<div th:replace="~{fragments/navbar}">Navbar</div>-->
+<main class="flex-shrink-0">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron text-center rounded mb-4">
+                    <h2 class="text-dark">Акции и Специальные предложения</h2>
+
+                    <div th:if="${#lists.isEmpty(model.offers)}" class="alert alert-info">
+                        Акции не найдены
+                    </div>
+
+                    <div th:each="offerItem : ${model.offers.getOffersItems()}"
+                         class="d-flex flex-column bg-text mb-3 p-3 border rounded">
+                        <h2 th:text="'Заголовок: ' + ${offerItem.title}">Заголовок</h2>
+                        <h4 th:text="'Описание: ' + ${offerItem.description}">Описание</h4>
+                        <h4 th:text="'Цена: ' + ${offerItem.price}">Цена</h4>
+                    </div>
+
+                    <div th:if="${model.offers.getTotalPages() > 1}">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item"
+                                th:each="pageNumber : ${#numbers.sequence(1, model.offers.totalPages)}"
+                                th:classappend="${pageNumber == model.offers.currentPage} ? 'active'">
+                                <a class="page-link"
+                                   th:href="@{/(page=${pageNumber}, size=${model.offers.pageSize})}"
+                                   th:text="${pageNumber}">1</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="jumbotron text-center rounded mb-4">
+                    <h2 class="text-dark">Новости</h2>
+
+                    <div th:if="${#lists.isEmpty(model.news.newsItems)}" class="alert alert-info">
+                        Новости не найдены
+                    </div>
+
+                    <div th:each="newsItem : ${model.news.getNewsItems()}"
+                         class="d-flex flex-column bg-text mb-3 p-3 border rounded">
+                        <h2 th:text="'Заголовок: ' + ${newsItem.title}">Заголовок</h2>
+                        <h4 th:text="'Описание: ' + ${newsItem.description}">Описание</h4>
+                        <h4 th:text="'Дата публикации: ' + ${newsItem.publicationDate}">Дата публикации</h4>
+                    </div>
+
+                    <div th:if="${model.news.getTotalPages() > 1}">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item"
+                                th:each="pageNumber : ${#numbers.sequence(1, model.news.totalPages)}"
+                                th:classappend="${pageNumber == model.news.currentPage} ? 'active'">
+                                <a class="page-link"
+                                   th:href="@{/(page=${pageNumber}, size=${model.news.pageSize})}"
+                                   th:text="${pageNumber}">1</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<!--<footer th:replace="fragments/footer"></footer>-->
+</body>
+</html>

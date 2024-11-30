@@ -8,17 +8,16 @@ import java.time.LocalDateTime;
 public class News extends BaseEntity {
     private String title;
     private String description;
-    private LocalDateTime publicationDate;
+    private String publicationDate;
 
     protected News() {}
 
     public News(String title, String description) {
         this.title = title;
         this.description = description;
-        this.publicationDate = LocalDateTime.now();
+        this.publicationDate = LocalDateTime.now().toString();
     }
 
-    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -27,7 +26,6 @@ public class News extends BaseEntity {
         this.title = title;
     }
 
-    @Column(name = "description", columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }
@@ -36,13 +34,21 @@ public class News extends BaseEntity {
         this.description = description;
     }
 
-    @Column(name = "publication_date")
-    public LocalDateTime getPublicationDate() {
+    public String getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(LocalDateTime publicationDate) {
+    public void setPublicationDate(String publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", publicationDate=" + publicationDate +
+                '}';
     }
 }
 
