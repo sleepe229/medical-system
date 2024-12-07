@@ -1,8 +1,6 @@
 package org.example.hospitalmanagementsystem.services.impl;
 
-import org.example.hospitalmanagementsystem.dto.AppointmentDto;
-import org.example.hospitalmanagementsystem.dto.AppointmentEditDto;
-import org.example.hospitalmanagementsystem.dto.AppointmentInputDto;
+import org.example.hospitalmanagementsystem.dto.*;
 import org.example.hospitalmanagementsystem.entities.*;
 import org.example.hospitalmanagementsystem.repository.*;
 import org.example.hospitalmanagementsystem.services.AppointmentService;
@@ -14,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -58,12 +57,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentRepo.save(appointment);
     }
 
-
     @Override
-    public Page<AppointmentDto> getAppointmentsForClient(String clientPhoneNumber, int page, int size) {
+    public Page<AppointmentDto> getAppointmentsForClient(int clientId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Client client = clientRepo.findByPhoneNumber(clientPhoneNumber)
-                .orElseThrow(() -> new IllegalArgumentException("Client with phone number " + clientPhoneNumber + " not found"));
+        Client client = clientRepo.findById(clientId)
+                .orElseThrow(() -> new IllegalArgumentException("Client with id" + clientId + " not found"));
         Page<Appointment> appointments = appointmentRepo.findByClient(client, pageable);
         return appointments.map(appointment -> modelMapper.map(appointment, AppointmentDto.class));
     }
@@ -84,13 +82,23 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Page<AppointmentDto> getAppointmentsForDoctor(String doctorName, int page, int size) {
-        Pageable pageable = PageRequest.of(page - 1, size);
-        Doctor doctor = doctorRepo.findByFullName(doctorName)
-                .orElseThrow(() -> new IllegalArgumentException("Doctor with name '" + doctorName + "' not found"));
+    public AppointmentDto getAppointmentById(Integer appointmentId) {
+        Optional<Appointment> appointment = appointmentRepo.findById(appointmentId);
+        if (appointment.isEmpty()) {
+            throw new IllegalArgumentException("Doctor with ID " + appointmentId + " not found");
+        }
+        return modelMapper.map(appointment.get(), AppointmentDto.class);
 
-        Page<Appointment> appointments = appointmentRepo.findByDoctor(doctor, pageable);
-        return appointments.map(appointment -> modelMapper.map(appointment, AppointmentDto.class));
+    }
+
+    @Override
+    public Page<AppointmentDto> getAppointmentsForDoctor(int doctorId,int page, int size) {
+        var doctor = doctorRepo.findById(doctorId).get();
+
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Appointment> appointmentPage = appointmentRepo.findByDoctor(doctor, pageable);
+        return appointmentPage.map(appointment -> new AppointmentDto(appointment.getId(), appointment.getClient().getPhoneNumber(), appointment.getAppointmentDate().toString(), appointment.getAnalyse() != null ? appointment.getAnalyse().getComment() : null, appointment.getStatus().getValue()));
+
     }
 
 }

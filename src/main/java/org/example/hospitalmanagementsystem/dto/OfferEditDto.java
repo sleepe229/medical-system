@@ -5,14 +5,16 @@ public class OfferEditDto{
         String title;
         String description;
         Integer price;
+        String imageUrl;
 
     public OfferEditDto(
             //Integer id,
-            String title, String description, Integer price) {
+            String title, String description, Integer price, String imageUrl) {
 //        this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 
     public OfferEditDto() {
@@ -48,5 +50,13 @@ public class OfferEditDto{
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

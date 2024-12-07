@@ -1,12 +1,16 @@
 package org.example.hospitalmanagementsystem.dto;
 
+import java.util.Date;
+
 public class NewsInputDto{
         String title;
         String description;
+        String publicationDate;
 
     public NewsInputDto(String title, String description) {
         this.title = title;
         this.description = description;
+        this.publicationDate = new Date().toString();
     }
 
     public NewsInputDto() {

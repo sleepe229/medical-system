@@ -4,11 +4,13 @@ public class OfferDto{
         String title;
         String description;
         Integer price;
+        String imageUrl;
 
-    public OfferDto(String title, String description, Integer price) {
+    public OfferDto(String title, String description, Integer price, String imageUrl) {
         this.title = title;
         this.description = description;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 
     public OfferDto() {
@@ -32,6 +34,14 @@ public class OfferDto{
 
     public Integer getPrice() {
         return price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Override

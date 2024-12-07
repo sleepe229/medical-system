@@ -9,8 +9,12 @@ import org.example.hospitalmanagementsystem.repository.DoctorRepo;
 import org.example.hospitalmanagementsystem.repository.SpecializationRepo;
 import org.example.hospitalmanagementsystem.services.DoctorService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -84,4 +88,25 @@ public class DoctorServiceImpl implements DoctorService {
     public Page<DoctorDto> getDoctorsByClinicAndSpecialization(int clinicId, int specializationId, int page, int size) {
         return null;
     }
+
+    @Override
+    public Page<DoctorDto> getDoctors(String searchTerm, int page, int size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Doctor> doctorPage = (searchTerm != null && !searchTerm.isEmpty())
+                ? doctorRepo.findByFullName(searchTerm, pageable)
+                : doctorRepo.findAll(pageable);
+        return doctorPage.map(doctor -> new DoctorDto(doctor.getId(), doctor.getFullName(), doctor.getEducation(), doctor.getPosition(), doctor.getSpecialization().getSpecializationName(), 1));
+    }
+
+    public void configureMappings() {
+        modelMapper.addMappings(new PropertyMap<DoctorInputDto, Doctor>() {
+            @Override
+            protected void configure() {
+                map(source.getSpecializationId(), destination.getSpecialization().getId());
+                map(source.getClinicId(), destination.getClinic().getId());
+                map(source.getStatusId(), destination.getStatus().getId());
+            }
+        });
+    }
+
 }

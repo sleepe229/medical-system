@@ -24,6 +24,15 @@ public class AppointmentDto{
         this.status = status;
     }
 
+    public AppointmentDto(Integer id, String phoneNumber, String date, String result, String status) {
+        this.id = id;
+        this.phoneNumber = phoneNumber;
+        this.date = date;
+        this.result = result;
+        this.status = status;
+    }
+
+
     public Integer getId() {
         return id;
     }

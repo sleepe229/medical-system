@@ -41,8 +41,8 @@ public class Init implements CommandLineRunner {
 //        List<Integer> clinicIds = initializeClinics();
 //        List<Integer> doctorIds = initializeDoctors(clinicIds);
 //        initializeAppointments(clinicIds, doctorIds);
-        initializeNews();
-        initializeOffers();
+//        initializeNews();
+//        initializeOffers();
     }
 
     private List<Integer> initializeClinics() {
@@ -123,18 +123,18 @@ public class Init implements CommandLineRunner {
         System.out.println("Новости успешно добавлены.");
     }
 
-    private void initializeOffers() {
-        System.out.println("Инициализация предложений...");
-
-        for (int i = 0; i < 10; i++) {
-            OfferInputDto offer = new OfferInputDto(
-                    faker.commerce().productName(),
-                    faker.lorem().paragraph(),
-                    faker.number().numberBetween(1, 100) * 100
-            );
-            offerService.createOffer(offer);
-        }
-
-        System.out.println("Предложения успешно добавлены.");
-    }
+//    private void initializeOffers() {
+//        System.out.println("Инициализация предложений...");
+//
+//        for (int i = 0; i < 10; i++) {
+//            OfferInputDto offer = new OfferInputDto(
+//                    faker.commerce().productName(),
+//                    faker.lorem().paragraph(),
+//                    faker.number().numberBetween(1, 100) * 100
+//            );
+//            offerService.createOffer(offer);
+//        }
+//
+//        System.out.println("Предложения успешно добавлены.");
+//    }
 }

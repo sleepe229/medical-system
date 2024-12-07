@@ -12,13 +12,15 @@ public class Offer extends BaseEntity {
     private String description;
     private int price;
     private Status status;
+    private String imageUrl;
 
     protected Offer() {}
-    public Offer(String title, String description, int price, Status status) {
+    public Offer(String title, String description, int price, Status status, String imageUrl) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.status = status;
+        this.imageUrl = imageUrl;
     }
 
     public String getTitle() {
@@ -53,5 +55,13 @@ public class Offer extends BaseEntity {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

@@ -7,7 +7,7 @@ public class DoctorDto{
         String specialization;
         Integer experienceYears;
 
-    public DoctorDto() {
+    public DoctorDto(int id, String fullName, String education, String position, String specializationName, int i) {
     }
 
     public DoctorDto(Integer id, String fullName, String position, String specialization, Integer experienceYears) {

@@ -11,5 +11,5 @@ import java.util.Optional;
 
 public interface DoctorRepo extends BaseCRUDRepo<Doctor, Integer> {
     Page<Doctor> findByClinicAndSpecialization(Clinic clinic, Specialization specialization, Pageable pageable);
-    Optional<Doctor> findByFullName(String fullName);
+    Page<Doctor> findByFullName(String fullName, Pageable pageable);
 }

@@ -1,10 +1,12 @@
-//package org.example.hospitalmanagementsystem.controllers;
+//package org.example.hospitalmanagementsystem.controllers.client;
 //
 //import jakarta.validation.Valid;
 //import org.example.hospitalmanagementsystem.services.AppointmentService;
 //import org.example.hospitalmanagementsystem.services.DoctorService;
 //import org.example.hospitalmanagementsystemview.controllers.client.ClientController;
 //import org.example.hospitalmanagementsystemview.input.AppointmentBookingForm;
+//import org.example.hospitalmanagementsystemview.input.UserCreateForm;
+//import org.example.hospitalmanagementsystemview.input.UserEditForm;
 //import org.example.hospitalmanagementsystemview.viewmodel.baseview.BaseViewModel;
 //import org.example.hospitalmanagementsystemview.viewmodel.lists.AnalysisListViewModel;
 //import org.example.hospitalmanagementsystemview.viewmodel.lists.AppointmentListViewModel;
@@ -32,12 +34,7 @@
 //    }
 //
 //    @Override
-//    public String listUpcomingAppointments(String id, AppointmentListViewModel appointmentListViewModel, Model model) {
-//        return "";
-//    }
-//
-//    @Override
-//    public String listPastAppointments(String id, AppointmentListViewModel appointmentListViewModel, Model model) {
+//    public String listAppointments(String id, AppointmentListViewModel appointmentListViewModel, Model model) {
 //        return "";
 //    }
 //
@@ -52,7 +49,7 @@
 //    }
 //
 //    @Override
-//    public String editAccount(String id, BindingResult bindingResult, Model model) {
+//    public String editAccount(String id, UserEditForm form, BindingResult bindingResult, Model model) {
 //        return "";
 //    }
 //
@@ -71,6 +68,11 @@
 ////
 ////        appointmentService.createAppointment();
 //        return "redirect:/home/";
+//    }
+//
+//    @Override
+//    public String createAccount(UserCreateForm form, BindingResult bindingResult, Model model) {
+//        return "";
 //    }
 //
 //    @Override
