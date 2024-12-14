@@ -9,6 +9,5 @@ public interface DoctorService {
     void createDoctor(DoctorInputDto doctorInputDto);
     void updateDoctor(DoctorEditDto doctorEditDto);
     DoctorDto getDoctor(int id);
-    Page<DoctorDto> getDoctorsByClinicAndSpecialization(int clinicId, int specialization, int page, int size);
     Page<DoctorDto> getDoctors(String doctorSearchTerm, int doctorPage, int doctorSize);
 }

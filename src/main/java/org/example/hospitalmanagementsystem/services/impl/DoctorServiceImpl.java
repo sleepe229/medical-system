@@ -85,11 +85,6 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Page<DoctorDto> getDoctorsByClinicAndSpecialization(int clinicId, int specializationId, int page, int size) {
-        return null;
-    }
-
-    @Override
     public Page<DoctorDto> getDoctors(String searchTerm, int page, int size) {
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<Doctor> doctorPage = (searchTerm != null && !searchTerm.isEmpty())

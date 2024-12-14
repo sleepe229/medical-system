@@ -1,7 +1,7 @@
 package org.example.hospitalmanagementsystem.dto;
 
 public class AppointmentEditDto{
-    Integer appointmentId;
+    Integer id;
     String phoneNumber;
     String direction;
     String clinic;
@@ -11,8 +11,8 @@ public class AppointmentEditDto{
     protected AppointmentEditDto() {
     }
 
-    public AppointmentEditDto(Integer appointmentId, String phoneNumber, String direction, String clinic, String doctorFullName, String result) {
-        this.appointmentId = appointmentId;
+    public AppointmentEditDto(Integer id, String phoneNumber, String direction, String clinic, String doctorFullName, String result) {
+        this.id = id;
         this.phoneNumber = phoneNumber;
         this.direction = direction;
         this.clinic = clinic;
@@ -20,12 +20,12 @@ public class AppointmentEditDto{
         this.result = result;
     }
 
-    public Integer getAppointmentId() {
-        return appointmentId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setAppointmentId(Integer appointmentId) {
-        this.appointmentId = appointmentId;
+    public void setAppointmentId(Integer id) {
+        this.id = id;
     }
 
     public String getPhoneNumber() {

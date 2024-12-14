@@ -57,48 +57,60 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentRepo.save(appointment);
     }
 
+//    @Override
+//    public Page<AppointmentDto> getAppointmentsForClient(int clientId, int page, int size) {
+//        Pageable pageable = PageRequest.of(page, size);
+//        Client client = clientRepo.findById(clientId)
+//                .orElseThrow(() -> new IllegalArgumentException("Client with id" + clientId + " not found"));
+//        Page<Appointment> appointments = appointmentRepo.findByClient(client, pageable);
+//        return appointments.map(appointment -> modelMapper.map(appointment, AppointmentDto.class));
+//    }
+
     @Override
-    public Page<AppointmentDto> getAppointmentsForClient(int clientId, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Client client = clientRepo.findById(clientId)
-                .orElseThrow(() -> new IllegalArgumentException("Client with id" + clientId + " not found"));
+    public void updateAppointmentResult(AppointmentEditDto editDto) {
+        Appointment appointment = appointmentRepo.findById(editDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Appointment with ID " + editDto.getId() + " not found"));
+
+        Analyse analyse = analyseRepo.findByAppointment(appointment);
+
+        if (analyse == null) {
+            analyse = new Analyse(appointment, editDto.getResult());
+
+            analyseRepo.save(analyse);
+            appointment.setAnalyse(analyse);
+        } else {
+            analyse.setComment(editDto.getResult());
+            analyse.setLastChange(LocalDateTime.now());
+            analyseRepo.save(analyse);
+        }
+
+//        Status completedStatus = statusRepo.findByValue("COMPLETED");
+//        appointment.setStatus(completedStatus);
+
+        appointmentRepo.save(appointment);
+    }
+    @Override
+    public AppointmentDto getAppointmentById(Integer appointmentId) {
+        Appointment appointment = appointmentRepo.findById(appointmentId).get();
+        return modelMapper.map(appointment, AppointmentDto.class);
+    }
+
+    @Override
+    public Page<AppointmentDto> getAppointmentsForClient(String username, int page, int size) {
+        var client = clientRepo.findByUserUsername(username).get();
+
+        Pageable pageable = PageRequest.of(page - 1, size);
         Page<Appointment> appointments = appointmentRepo.findByClient(client, pageable);
         return appointments.map(appointment -> modelMapper.map(appointment, AppointmentDto.class));
     }
 
     @Override
-    public void updateAppointmentResult(AppointmentEditDto editDto) {
-        Appointment appointment = appointmentRepo.findById(editDto.getAppointmentId())
-                .orElseThrow(() -> new IllegalArgumentException("Appointment with ID " + editDto.getAppointmentId() + " not found"));
-
-        Analyse analyse = analyseRepo.findByAppointment(appointment);
-        analyse.setComment(editDto.getResult());
-        analyse.setLastChange(LocalDateTime.now());
-
-        Status completedStatus = statusRepo.findByValue("COMPLETED");
-        appointment.setStatus(completedStatus);
-
-        appointmentRepo.save(appointment);
-    }
-
-    @Override
-    public AppointmentDto getAppointmentById(Integer appointmentId) {
-        Optional<Appointment> appointment = appointmentRepo.findById(appointmentId);
-        if (appointment.isEmpty()) {
-            throw new IllegalArgumentException("Doctor with ID " + appointmentId + " not found");
-        }
-        return modelMapper.map(appointment.get(), AppointmentDto.class);
-
-    }
-
-    @Override
-    public Page<AppointmentDto> getAppointmentsForDoctor(int doctorId,int page, int size) {
-        var doctor = doctorRepo.findById(doctorId).get();
+    public Page<AppointmentDto> getAppointmentsForDoctor(String username, int page, int size) {
+        var doctor = doctorRepo.findByUserUsername(username).get();
 
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<Appointment> appointmentPage = appointmentRepo.findByDoctor(doctor, pageable);
         return appointmentPage.map(appointment -> new AppointmentDto(appointment.getId(), appointment.getClient().getPhoneNumber(), appointment.getAppointmentDate().toString(), appointment.getAnalyse() != null ? appointment.getAnalyse().getComment() : null, appointment.getStatus().getValue()));
 
     }
-
 }

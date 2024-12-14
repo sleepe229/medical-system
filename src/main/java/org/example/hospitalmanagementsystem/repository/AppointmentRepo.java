@@ -6,6 +6,7 @@ import org.example.hospitalmanagementsystem.entities.Doctor;
 import org.example.hospitalmanagementsystem.repository.base.BaseCRUDRepo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 
 public interface AppointmentRepo extends BaseCRUDRepo<Appointment, Integer> {
     Page<Appointment> findByClient(Client client, Pageable pageable);

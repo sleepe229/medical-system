@@ -11,8 +11,9 @@ public interface AppointmentService {
     void createAppointment(AppointmentInputDto inputDto);
     void updateAppointmentResult(AppointmentEditDto editDto);
     AppointmentDto getAppointmentById(Integer appointmentId);
-    Page<AppointmentDto> getAppointmentsForClient(int clientId, int page, int size);
-    Page<AppointmentDto> getAppointmentsForDoctor(int doctorId,int page, int size);
-
+//    Page<AppointmentDto> getAppointmentsForClient(int clientId, int page, int size);
+    Page<AppointmentDto> getAppointmentsForClient(String username, int page, int size);
+//    Page<AppointmentDto> getAppointmentsForDoctor(int doctorId, int page, int size);
+    Page<AppointmentDto> getAppointmentsForDoctor(String username, int page, int size);
 }
 

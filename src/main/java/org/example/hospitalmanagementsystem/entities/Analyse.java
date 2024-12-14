@@ -12,7 +12,8 @@ public class Analyse extends BaseEntity {
     LocalDateTime lastChange;
 
     protected Analyse() {}
-    protected Analyse(Client client, String comment) {
+    public Analyse(Appointment appointment, String comment) {
+        this.appointment = appointment;
         this.comment = comment;
         this.lastChange = LocalDateTime.now();
     }

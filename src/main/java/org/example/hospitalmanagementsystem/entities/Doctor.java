@@ -12,6 +12,7 @@ public class Doctor extends BasePerson {
     private String position;
     private Status status;
     private Clinic clinic;
+    private User user;
 
     protected Doctor() {}
 
@@ -23,6 +24,11 @@ public class Doctor extends BasePerson {
         this.position = position;
         this.status = status;
         this.clinic = clinic;
+    }
+
+    public Doctor(String name, String phoneNumber, Specialization specialization, String education, LocalDate hireDate, String position, Status status, Clinic clinic, User user) {
+        this(name, phoneNumber, specialization, education, hireDate, position, status, clinic);
+        this.user = user;
     }
 
     @ManyToOne
@@ -78,4 +84,15 @@ public class Doctor extends BasePerson {
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
     }
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

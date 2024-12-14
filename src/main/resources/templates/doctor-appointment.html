@@ -41,7 +41,7 @@
                                     <p class="card-text" th:if="${appointment.result != null}" th:text="${appointment.result}">Результат</p>
                                     <p class="card-text" th:text="${appointment.status}">Статус</p>
                                     <!--                                    <a th:href="@{/offer/{id}(id=${offer.id})}" class="btn btn-primary">Подробнее</a>-->
-                                    <!--                                    <a th:href="@{/offer/{id}/edit(id=${offer.id})}" class="btn btn-warning">Редактировать</a>-->
+                                                                        <a th:href="@{/doctor/appointments/{id}/edit(id=${appointment.id})}" class="btn btn-warning">Редактировать</a>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                     <ul class="pagination justify-content-center">
                         <li class="page-item"
                             th:each="pageNumber : ${#numbers.sequence(1, model.totalPages)}"
-                            th:classappend="${pageNumber == newsForm.page} ? 'active'">
+                            th:classappend="${pageNumber == form.page} ? 'active'">
                             <a class="page-link"
                                th:href="@{/doctor(page=${pageNumber}, size=${form.size})}"
                                th:text="${pageNumber}">1</a>

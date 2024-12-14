@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<!--<head th:replace="fragments/head"/>-->
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/doctor-navbar">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+                <div class="justify-content-center">
+                    <h1>Добавить статус</h1>
+                </div>
+                <form th:action="@{doctor/appointments/{id}/edit(id=${form.id})}"
+                      th:method="post"
+                      th:object="${form}"
+                      class="m-md-auto w-50 pb-3">
+
+                    <input th:field="*{id}"
+                           type="hidden"
+                           class="form-control text-center"
+                           id="id"/>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="phoneNumber">Phone number</label>
+                        <input th:field="*{phoneNumber}"
+                               th:errorclass="is-invalid"
+                               type="text"
+                               class="form-control text-center"
+                               id="phoneNumber"/>
+                        <small th:if="${#fields.hasErrors('phoneNumber')}"
+                               th:errors="*{phoneNumber}"
+                               class="text-danger">Error message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="direction">Direction</label>
+                        <input th:field="*{direction}"
+                               th:errorclass="is-invalid"
+                               type="text"
+                               class="form-control text-center"
+                               id="direction"/>
+                        <small th:if="${#fields.hasErrors('direction')}"
+                               th:errors="*{direction}"
+                               class="text-danger">Error message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="clinic">Clinic id</label>
+                        <input th:field="*{clinic}"
+                               th:errorclass="is-invalid"
+                               type="text"
+                               class="form-control text-center"
+                               id="clinic"/>
+                        <small th:if="${#fields.hasErrors('clinic')}"
+                               th:errors="*{clinic}"
+                               class="text-danger">Error message</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="result">Result</label>
+                        <input th:field="*{result}"
+                               th:errorclass="is-invalid"
+                               type="text"
+                               class="form-control text-center"
+                               id="result"/>
+                        <small th:if="${#fields.hasErrors('result')}"
+                               th:errors="*{result}"
+                               class="text-danger">Error message</small>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Добавить результат</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<!--<footer th:replace="fragments/footer"/>-->
+</body>
+</html>
